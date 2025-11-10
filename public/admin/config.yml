@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date",  name: "date",  widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "Author", name: "author", widget: "string", default: "IBAS DEV" }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Cover", name: "cover", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
