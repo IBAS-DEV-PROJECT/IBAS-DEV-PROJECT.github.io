@@ -1,6 +1,0 @@
-title: "IBAS Dev Tech Blog"
-description: "우리 팀의 개발 기록"
-theme: minima
-plugins:
-  - jekyll-seo-tag
-  - jekyll-feed
