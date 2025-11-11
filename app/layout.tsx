@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "IBAS 기술 블로그",
@@ -15,38 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className="antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50"
-      >
-        <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-          <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="/" className="text-xl font-bold hover:text-slate-600 dark:hover:text-slate-300">
-              📚 IBAS Blog
-            </a>
-            <div className="flex items-center gap-2">
-              <a
-                href="/admin/stats"
-                className="text-sm px-4 py-2 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-300 dark:hover:bg-slate-700 transition"
-              >
-                📊 통계
-              </a>
-              <a
-                href="/admin"
-                className="text-sm px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
-              >
-                Admin
-              </a>
+      <body className="antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+        <SessionProvider>
+          <Header />
+          <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {children}
+          </main>
+          <footer className="border-t border-slate-200 dark:border-slate-800 mt-12">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm text-slate-600 dark:text-slate-400">
+              <p>&copy; 2025 IBAS Development Team. All rights reserved.</p>
             </div>
-          </nav>
-        </header>
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {children}
-        </main>
-        <footer className="border-t border-slate-200 dark:border-slate-800 mt-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm text-slate-600 dark:text-slate-400">
-            <p>&copy; 2025 IBAS Development Team. All rights reserved.</p>
-          </div>
-        </footer>
+          </footer>
+        </SessionProvider>
       </body>
     </html>
   );
