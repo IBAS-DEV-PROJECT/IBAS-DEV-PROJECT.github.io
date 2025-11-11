@@ -5,6 +5,9 @@ const config: NextConfig = {
   output: 'export', // ★ GitHub Pages용 정적 내보내기
   images: { unoptimized: true },
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'], // MDX 페이지 허용
+  experimental: {
+    turbopackUseSystemTlsCerts: true,
+  },
 };
 
 export default withContentlayer(config);
