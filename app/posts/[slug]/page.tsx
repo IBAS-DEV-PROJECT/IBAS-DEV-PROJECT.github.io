@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PostInteraction from "@/components/PostInteraction";
 import Comments from "@/components/Comments";
+import ViewTracker from "@/components/ViewTracker";
 
 interface PostPageProps {
   params: Promise<{
@@ -48,6 +49,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article className="max-w-3xl mx-auto py-8">
+      <ViewTracker slug={post.slug} />
       {/* 뒤로가기 */}
       <Link
         href="/"
