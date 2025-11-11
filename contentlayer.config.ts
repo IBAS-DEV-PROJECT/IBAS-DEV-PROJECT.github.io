@@ -6,7 +6,7 @@ import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: `posts/**/*.mdx`,
+  filePathPattern: `**/*.mdx`,
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
@@ -25,7 +25,7 @@ export const Post = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: '.',
+  contentDirPath: 'posts',
   documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm],
