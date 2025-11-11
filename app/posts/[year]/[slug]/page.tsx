@@ -1,27 +1,33 @@
 import { notFound } from "next/navigation";
 import { allPosts } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer2/hooks";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostInteraction from "@/components/PostInteraction";
 import Comments from "@/components/Comments";
 import ViewTracker from "@/components/ViewTracker";
+import PostContent from "@/components/PostContent";
 
 interface PostPageProps {
   params: Promise<{
+    year: string;
     slug: string;
   }>;
 }
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  return allPosts.map((post) => {
+    const [year, ...slugParts] = post.slug.split("/");
+    return {
+      year,
+      slug: slugParts.join("/"),
+    };
+  });
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = allPosts.find((post) => post.slug === slug);
+  const { year, slug } = await params;
+  const fullSlug = `${year}/${slug}`;
+  const post = allPosts.find((post) => post.slug === fullSlug);
 
   if (!post) {
     return {
@@ -38,14 +44,13 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = await params;
-  const post = allPosts.find((post) => post.slug === slug);
+  const { year, slug } = await params;
+  const fullSlug = `${year}/${slug}`;
+  const post = allPosts.find((post) => post.slug === fullSlug);
 
   if (!post) {
     notFound();
   }
-
-  const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <article className="max-w-3xl mx-auto py-8">
@@ -109,9 +114,7 @@ export default async function PostPage({ params }: PostPageProps) {
       )}
 
       {/* 본문 */}
-      <div className="prose dark:prose-invert max-w-none mb-12">
-        <MDXContent />
-      </div>
+      <PostContent code={post.body.code} />
 
       {/* 상호작용 */}
       <PostInteraction slug={post.slug} title={post.title} />
