@@ -23,12 +23,20 @@ export default function RootLayout({
             <a href="/" className="text-xl font-bold hover:text-slate-600 dark:hover:text-slate-300">
               📚 IBAS Blog
             </a>
-            <a
-              href="/admin"
-              className="text-sm px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
-            >
-              Admin
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href="/admin/stats"
+                className="text-sm px-4 py-2 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-300 dark:hover:bg-slate-700 transition"
+              >
+                📊 통계
+              </a>
+              <a
+                href="/admin"
+                className="text-sm px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
+              >
+                Admin
+              </a>
+            </div>
           </nav>
         </header>
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
