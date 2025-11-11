@@ -2,9 +2,16 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { data: session } = useSession();
+  const pathname = usePathname();
+
+  // admin 경로에서는 Header를 표시하지 않음
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
