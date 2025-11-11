@@ -26,5 +26,5 @@ collections:
       - { label: "태그", name: "tags", widget: "list", default: [], allow_add: true }
       - { label: "요약", name: "summary", widget: "text", required: false, hint: "포스트 목록에 표시될 요약입니다" }
       - { label: "커버 이미지", name: "cover", widget: "image", required: false, hint: "포스트 상단에 표시될 이미지입니다" }
-      - { label: "본문", name: "body", widget: "markdown", modes: ["raw", "rich_text"], buttons: ["bold", "italic", "code", "link", "heading-two", "heading-three", "quote", "bullet-list", "numbered-list"] }
+      - { label: "본문", name: "body", widget: "markdown" }
 
